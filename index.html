@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NOCTA — The Product Layer</title>
+<meta name="description" content="NOCTA — fictional startup product concept by Virexa & Hartwell.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#050507;--panel:#0d0d11;--panel2:#121218;--text:#f6f5f2;--muted:#85848d;--line:#24242c;--violet:#9b7cff;--cyan:#6cf4df;--pad:clamp(18px,4vw,58px)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,Arial,sans-serif;overflow-x:hidden}
+a{color:inherit;text-decoration:none}button{font:inherit}.mono{font:11px "DM Mono";letter-spacing:.08em;text-transform:uppercase}
+.bg-orb{position:fixed;width:55vw;height:55vw;max-width:850px;max-height:850px;border-radius:50%;background:radial-gradient(circle,rgba(155,124,255,.14),transparent 65%);top:-25vw;right:-15vw;pointer-events:none;z-index:-1;animation:drift 12s ease-in-out infinite alternate}@keyframes drift{to{transform:translate(-10vw,12vw)}}
+.gridbg{position:fixed;inset:0;pointer-events:none;z-index:-2;background-image:linear-gradient(rgba(255,255,255,.028) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.028) 1px,transparent 1px);background-size:60px 60px;mask-image:linear-gradient(to bottom,black,transparent 75%)}
+nav{height:76px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 var(--pad);position:sticky;top:0;background:rgba(5,5,7,.72);backdrop-filter:blur(18px);z-index:50}
+.logo{font-weight:800;letter-spacing:-.06em;font-size:20px}.logo i{font-style:normal;color:var(--violet)}.navlinks{display:flex;gap:28px;font-size:12px;color:#aaa9b1}.navlinks a:hover{color:white}.nav-cta{border:1px solid #3a3944;border-radius:99px;padding:10px 15px;font-size:11px;background:#101016;transition:.3s}.nav-cta:hover{border-color:var(--violet);box-shadow:0 0 25px rgba(155,124,255,.18)}
+.hero{min-height:calc(100svh - 76px);display:flex;flex-direction:column;justify-content:center;padding:80px var(--pad) 65px;position:relative}
+.badge{width:max-content;border:1px solid #302f39;border-radius:99px;padding:8px 12px;color:#aaa9b1;background:#0a0a0e}.badge b{color:var(--cyan);font-weight:500}.hero h1{font-size:clamp(68px,12vw,185px);line-height:.82;letter-spacing:-.09em;max-width:1100px;margin:35px 0 30px;font-weight:700}.hero h1 span{color:var(--violet)}.hero-copy{display:flex;justify-content:space-between;gap:30px;align-items:end}.hero-copy p{max-width:510px;color:#a6a5ad;line-height:1.75;font-size:15px}.hero-actions{display:flex;gap:10px}.btn{border:1px solid #3a3944;padding:14px 18px;border-radius:99px;font:11px "DM Mono";text-transform:uppercase;transition:.35s}.btn.primary{background:var(--text);color:#09090b;border-color:var(--text)}.btn:hover{transform:translateY(-4px);border-color:var(--violet);box-shadow:0 12px 40px rgba(155,124,255,.16)}.signal{position:absolute;right:7%;top:25%;width:clamp(150px,22vw,330px);aspect-ratio:1;border:1px solid #272630;border-radius:50%;display:grid;place-items:center;animation:rotate 18s linear infinite}.signal:before,.signal:after{content:"";position:absolute;border-radius:50%;border:1px solid #292832}.signal:before{inset:15%}.signal:after{inset:31%;border-color:var(--violet);box-shadow:0 0 40px rgba(155,124,255,.4)}.signal-dot{width:8px;height:8px;background:var(--cyan);border-radius:50%;box-shadow:0 0 25px var(--cyan)}@keyframes rotate{to{transform:rotate(360deg)}}
+.ticker{border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;white-space:nowrap;padding:15px 0}.ticker-track{display:inline-flex;animation:marquee 22s linear infinite}.ticker span{padding:0 25px;color:#77767f;font:11px "DM Mono"}.ticker .hot{color:var(--cyan)}@keyframes marquee{to{transform:translateX(-50%)}}
+section{padding:125px var(--pad)}.label{color:var(--violet);font:11px "DM Mono";text-transform:uppercase;letter-spacing:.1em}.intro{display:grid;grid-template-columns:.55fr 1.45fr;gap:40px}.intro h2{font-size:clamp(40px,6vw,82px);line-height:.92;letter-spacing:-.07em;margin:0;max-width:950px}.intro h2 em{font-style:normal;color:#777680}
+.product{padding-top:30px}.dashboard{border:1px solid var(--line);border-radius:24px;background:rgba(13,13,17,.92);overflow:hidden;box-shadow:0 35px 100px rgba(0,0,0,.35);transform:perspective(1400px) rotateX(4deg);transition:transform 1s cubic-bezier(.2,.7,.2,1)}.dashboard:hover{transform:perspective(1400px) rotateX(0) translateY(-8px)}.dashbar{height:54px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 18px}.dots{display:flex;gap:6px}.dots i{width:7px;height:7px;border-radius:50%;background:#393842}.dashbody{display:grid;grid-template-columns:190px 1fr;min-height:470px}.side{border-right:1px solid var(--line);padding:20px}.side strong{display:block;margin-bottom:30px}.side a{display:block;color:#72717a;font-size:12px;padding:10px 0}.side a.active{color:white}.workspace{padding:28px}.dash-top{display:flex;justify-content:space-between;gap:20px}.dash-top h3{font-size:25px;margin:0}.live{color:var(--cyan);font:10px "DM Mono";padding:7px 9px;border:1px solid rgba(108,244,223,.2);border-radius:99px}.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:22px}.metric{border:1px solid var(--line);border-radius:14px;padding:16px}.metric small{color:#72717a;font-size:10px}.metric b{display:block;font-size:24px;margin-top:13px}.metric .up{color:var(--cyan);font-size:10px}.chart{height:180px;border:1px solid var(--line);border-radius:14px;margin-top:10px;padding:15px;display:flex;align-items:end;gap:7px;background:linear-gradient(180deg,rgba(155,124,255,.04),transparent)}.bar{flex:1;background:linear-gradient(to top,var(--violet),#6d5aab);border-radius:4px 4px 0 0;min-height:18px;animation:grow 1.5s cubic-bezier(.2,.7,.2,1) backwards}.bar:nth-child(2){animation-delay:.05s}.bar:nth-child(3){animation-delay:.1s}.bar:nth-child(4){animation-delay:.15s}.bar:nth-child(5){animation-delay:.2s}.bar:nth-child(6){animation-delay:.25s}.bar:nth-child(7){animation-delay:.3s}.bar:nth-child(8){animation-delay:.35s}@keyframes grow{from{height:0}}
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.feature{border:1px solid var(--line);border-radius:20px;padding:28px;min-height:270px;background:linear-gradient(145deg,#0d0d11,#09090c);transition:.4s;position:relative;overflow:hidden}.feature:hover{transform:translateY(-8px);border-color:#494654}.feature:after{content:"";position:absolute;width:130px;height:130px;border-radius:50%;background:var(--violet);filter:blur(60px);opacity:0;right:-50px;bottom:-50px;transition:.5s}.feature:hover:after{opacity:.18}.feature .icon{width:38px;height:38px;border:1px solid #3a3944;border-radius:12px;display:grid;place-items:center;color:var(--cyan);margin-bottom:55px}.feature h3{font-size:24px;letter-spacing:-.04em;margin:0 0 10px}.feature p{color:#7f7e87;font-size:12px;line-height:1.7;margin:0}
+.loop{background:#f2f0ea;color:#111116;position:relative;overflow:hidden}.loop .label{color:#7656dd}.loop h2{font-size:clamp(48px,8vw,120px);letter-spacing:-.08em;line-height:.84;margin:20px 0 65px;max-width:1000px}.loop h2 span{font-style:italic;font-weight:400}.rings{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:#d2cfc7}.ring{background:#f2f0ea;min-height:230px;padding:24px;position:relative;overflow:hidden}.ring b{font-size:12px}.ring .circle{position:absolute;width:150px;height:150px;border:1px solid #c9c5bc;border-radius:50%;right:-35px;bottom:-50px;transition:.6s}.ring:hover .circle{transform:scale(1.35);border-color:#7656dd}.ring p{position:absolute;left:24px;bottom:24px;max-width:180px;font-size:12px;line-height:1.6;color:#65636b}
+.pricing{display:grid;grid-template-columns:1fr 1fr;gap:25px;align-items:end}.pricing h2{font-size:clamp(45px,6vw,80px);line-height:.9;letter-spacing:-.07em;margin:15px 0}.price-card{border:1px solid var(--line);border-radius:24px;padding:30px;background:#0d0d11}.price-card .top{display:flex;justify-content:space-between}.price-card h3{margin:0;font-size:24px}.price{font-size:50px;letter-spacing:-.07em;margin:35px 0 10px}.price small{font-size:11px;color:#777680;letter-spacing:0}.price-card ul{padding:0;margin:25px 0;list-style:none;border-top:1px solid var(--line)}.price-card li{padding:12px 0;border-bottom:1px solid var(--line);color:#9998a0;font-size:12px}.price-card li:before{content:"✓";color:var(--cyan);margin-right:9px}.price-card .btn{display:block;text-align:center}
+.final{min-height:75vh;display:flex;flex-direction:column;justify-content:space-between;background:radial-gradient(circle at 80% 40%,rgba(155,124,255,.16),transparent 30%)}.final h2{font-size:clamp(70px,13vw,190px);line-height:.78;letter-spacing:-.1em;margin:30px 0;max-width:1200px}.final h2 span{color:var(--violet)}.final-bottom{display:flex;justify-content:space-between;align-items:end;border-top:1px solid var(--line);padding-top:25px}.final-bottom p{color:#85848d;max-width:440px;font-size:13px;line-height:1.7}.bigbtn{display:inline-flex;border-radius:99px;background:var(--text);color:#07070a;padding:17px 22px;font:11px "DM Mono";text-transform:uppercase;transition:.35s}.bigbtn:hover{background:var(--violet);color:white;transform:scale(1.04)}
+footer{border-top:1px solid var(--line);padding:22px var(--pad);display:flex;justify-content:space-between;color:#66656e;font:10px "DM Mono";text-transform:uppercase}
+.reveal{opacity:0;transform:translateY(40px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}.reveal.in{opacity:1;transform:none}.d1{transition-delay:.1s}.d2{transition-delay:.2s}
+@media(max-width:800px){nav{height:68px}.navlinks{display:none}.nav-cta{padding:8px 11px}.hero{padding-top:70px}.hero h1{font-size:20vw;margin-top:28px}.hero-copy{display:block}.hero-actions{margin-top:20px}.signal{right:-15%;top:22%;opacity:.55}.intro,.pricing{grid-template-columns:1fr}.dashbody{grid-template-columns:1fr}.side{display:none}.metrics{grid-template-columns:1fr}.features{grid-template-columns:1fr}.rings{grid-template-columns:1fr 1fr}.ring{min-height:210px}.dashboard{transform:none}.final-bottom{display:block}.final-bottom .bigbtn{margin-top:20px}section{padding:100px var(--pad)}}
+
+/* CINEMATIC ENTRY */
+.intro-screen{position:fixed;inset:0;background:#050507;z-index:10000;color:#f6f5f2;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.intro-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:70px 70px;transform:scale(1.15);opacity:0;animation:introGrid 1.2s .15s ease forwards}
+.intro-mark{position:relative;font-size:clamp(58px,13vw,170px);font-weight:800;letter-spacing:-.095em;transform:translateY(35px);opacity:0;animation:introMark 1s .25s cubic-bezier(.16,1,.3,1) forwards}
+.intro-mark span{color:#9b7cff}
+.intro-meta{position:absolute;left:var(--pad);right:var(--pad);bottom:54px;display:flex;justify-content:space-between;color:#6f6e77;opacity:0;animation:introFade .6s .45s forwards}
+.intro-percent{color:#6cf4df}
+.intro-line{position:absolute;left:var(--pad);right:var(--pad);bottom:35px;height:1px;background:#202027;overflow:hidden}
+.intro-line i{display:block;height:100%;width:0;background:linear-gradient(90deg,#9b7cff,#6cf4df);animation:introLoad 1.55s cubic-bezier(.76,0,.24,1) forwards}
+.intro-screen.done{animation:introOut 1s cubic-bezier(.76,0,.24,1) forwards;pointer-events:none}
+@keyframes introGrid{to{opacity:1;transform:scale(1)}}@keyframes introMark{to{opacity:1;transform:none}}@keyframes introFade{to{opacity:1}}@keyframes introLoad{to{width:100%}}@keyframes introOut{0%{clip-path:inset(0 0 0 0)}100%{clip-path:inset(0 0 100% 0);visibility:hidden}}
+.pointer-ring{position:fixed;width:34px;height:34px;border:1px solid rgba(246,245,242,.45);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .25s,height .25s,border-color .25s;display:none}
+.pointer-dot{position:fixed;width:5px;height:5px;background:#6cf4df;border-radius:50%;pointer-events:none;z-index:10000;transform:translate(-50%,-50%);display:none}
+body.cursor-ready .pointer-ring,body.cursor-ready .pointer-dot{display:block}
+body.cursor-ready a:hover~.pointer-ring{width:65px;height:65px;border-color:#9b7cff}
+.scroll-progress{position:fixed;left:0;top:0;height:2px;width:0;background:linear-gradient(90deg,#9b7cff,#6cf4df);z-index:1000}
+.hero h1{animation:heroRise 1.1s .9s cubic-bezier(.16,1,.3,1) both}
+.hero-copy{animation:heroRise .9s 1.05s cubic-bezier(.16,1,.3,1) both}
+@keyframes heroRise{from{opacity:0;transform:translateY(45px)}to{opacity:1;transform:none}}
+.signal{animation:rotate 18s linear infinite,signalIn 1.4s 1.1s cubic-bezier(.16,1,.3,1) both}
+@keyframes signalIn{from{opacity:0;transform:scale(.55) rotate(-35deg)}to{opacity:1;transform:scale(1) rotate(0)}}
+.dashboard{position:relative}
+.dashboard:before{content:"";position:absolute;inset:-1px;border-radius:24px;padding:1px;background:linear-gradient(110deg,transparent 25%,rgba(155,124,255,.7),transparent 65%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:.5;animation:borderSweep 4s linear infinite}
+@keyframes borderSweep{to{transform:translateX(15%)}} 
+.feature,.ring,.price-card{will-change:transform}
+@media(min-width:801px){body{cursor:none}}
+@media(max-width:800px){.pointer-ring,.pointer-dot{display:none!important}.intro-meta{bottom:48px}}
+</style>
+</head>
+<body>
+<div class="intro-screen" aria-hidden="true">
+  <div class="intro-grid"></div>
+  <div class="intro-mark">N<span>O</span>CTA</div>
+  <div class="intro-meta mono"><span>PRODUCT / SYSTEM / 2026</span><span class="intro-percent">00%</span></div>
+  <div class="intro-line"><i></i></div>
+</div>
+<div class="pointer-ring"></div><div class="pointer-dot"></div>
+<div class="scroll-progress"></div>
+<div class="bg-orb"></div><div class="gridbg"></div>
+<nav>
+<a class="logo" href="#top">N<span>O</span>CTA</a>
+<div class="navlinks"><a href="#product">Product</a><a href="#why">Why Nocta</a><a href="#pricing">Access</a></div>
+<a class="nav-cta" href="#pricing">Get early access ↗</a>
+</nav>
+
+<main id="top">
+<section class="hero">
+<div class="badge mono"><b>●</b> Private beta · Product concept</div>
+<h1>Your work has a<br><span>control layer.</span></h1>
+<div class="hero-copy">
+<p>NOCTA is a fictional command layer for modern teams — bringing projects, decisions, signals and momentum into one living workspace.</p>
+<div class="hero-actions"><a class="btn primary" href="#product">See the product ↓</a><a class="btn" href="#pricing">Request access</a></div>
+</div>
+<div class="signal"><div class="signal-dot"></div></div>
+</section>
+
+<div class="ticker"><div class="ticker-track">
+<span>Projects</span><span class="hot">✦ Decisions</span><span>Signals</span><span>Momentum</span><span class="hot">✦ Team intelligence</span><span>Projects</span><span class="hot">✦ Decisions</span><span>Signals</span><span>Momentum</span><span class="hot">✦ Team intelligence</span>
+</div></div>
+
+<section class="intro" id="why">
+<div class="label">The problem</div>
+<h2 class="reveal">Work shouldn't live in twelve tabs. <em>Neither should the thinking behind it.</em></h2>
+</section>
+
+<section class="product" id="product">
+<div class="dashboard reveal">
+<div class="dashbar"><div class="dots"><i></i><i></i><i></i></div><span class="mono" style="color:#6cf4df">SYNCED · 09:42</span></div>
+<div class="dashbody">
+<aside class="side"><strong>NOCTA</strong><a class="active">Overview</a><a>Projects</a><a>Signals</a><a>Decisions</a><a>People</a></aside>
+<div class="workspace">
+<div class="dash-top"><div><span class="mono" style="color:#777680">Workspace / Today</span><h3>Good morning, team.</h3></div><span class="live">LIVE</span></div>
+<div class="metrics">
+<div class="metric"><small>Momentum</small><b>84%</b><span class="up">↑ 12% this week</span></div>
+<div class="metric"><small>Open decisions</small><b>07</b><span class="up">3 resolved today</span></div>
+<div class="metric"><small>Team pulse</small><b>92</b><span class="up">↑ 4 points</span></div>
+</div>
+<div class="chart">
+<div class="bar" style="height:42%"></div><div class="bar" style="height:55%"></div><div class="bar" style="height:49%"></div><div class="bar" style="height:71%"></div><div class="bar" style="height:62%"></div><div class="bar" style="height:82%"></div><div class="bar" style="height:75%"></div><div class="bar" style="height:94%"></div>
+</div>
+</div></div></div>
+</div>
+</section>
+
+<section>
+<div class="label">What changes</div>
+<div class="features" style="margin-top:45px">
+<article class="feature reveal"><div class="icon">◎</div><h3>One living view</h3><p>Projects, priorities and decisions update together instead of becoming separate documents.</p></article>
+<article class="feature reveal d1"><div class="icon">↗</div><h3>Signals, not noise</h3><p>Surface the changes that deserve attention and leave the rest where it belongs.</p></article>
+<article class="feature reveal d2"><div class="icon">⌁</div><h3>Momentum by design</h3><p>See what's moving, what's blocked and where a small decision can unlock the next step.</p></article>
+</div>
+</section>
+
+<section class="loop">
+<div class="label">The operating loop</div>
+<h2 class="reveal">See it. Decide it. <span>Move it.</span></h2>
+<div class="rings">
+<div class="ring"><b>SEE</b><div class="circle"></div><p>Understand what changed across the work.</p></div>
+<div class="ring"><b>FRAME</b><div class="circle"></div><p>Give the important question a clear home.</p></div>
+<div class="ring"><b>DECIDE</b><div class="circle"></div><p>Capture the choice and the person behind it.</p></div>
+<div class="ring"><b>MOVE</b><div class="circle"></div><p>Turn the decision into visible momentum.</p></div>
+</div>
+</section>
+
+<section id="pricing">
+<div class="pricing">
+<div class="reveal"><div class="label">Private access</div><h2>Build a calmer<br>operating system.</h2><p style="color:#85848d;max-width:460px;line-height:1.7;font-size:13px">NOCTA is presented as a fictional startup/product concept. The interface and metrics shown are sample data, not a live software service.</p></div>
+<div class="price-card reveal d1">
+<div class="top"><h3>Founding workspace</h3><span class="mono" style="color:#6cf4df">LIMITED</span></div>
+<div class="price">$49 <small>/ seat / month</small></div>
+<ul><li>Unlimited projects</li><li>Decision intelligence</li><li>Team signals</li><li>Workspace analytics</li></ul>
+<a class="btn primary" href="mailto:virexahartwell@gmail.com?subject=NOCTA%20Early%20Access&body=Hi%20Virexa%20%26%20Hartwell%2C%0A%0AI%27d%20like%20to%20discuss%20NOCTA%20early%20access.%0A%0ARegards%2C">Request private access ↗</a>
+</div>
+</div>
+</section>
+
+<section class="final">
+<div><div class="label">The next tab shouldn't be another tab.</div><h2 class="reveal">Make work<br><span>visible.</span></h2></div>
+<div class="final-bottom"><p>Have a product, SaaS idea or digital experience that needs a stronger point of view? Virexa & Hartwell can design the system around it.</p><a class="bigbtn" href="mailto:virexahartwell@gmail.com?subject=NOCTA%20Project%20Enquiry&body=Hi%20Virexa%20%26%20Hartwell%2C%0A%0AI%27d%20like%20to%20discuss%20a%20product%20or%20SaaS%20project.%0A%0ARegards%2C">Start a project ↗</a></div>
+</section>
+</main>
+<footer><span>NOCTA — fictional startup/product concept</span><span>Designed by Virexa & Hartwell · 2026</span></footer>
+<script>
+const intro=document.querySelector('.intro-screen');
+const pct=document.querySelector('.intro-percent');
+setTimeout(()=>intro.classList.add('done'),1750);
+let p=0; const counter=setInterval(()=>{p=Math.min(100,p+4); if(p>=100)clearInterval(counter); pct.textContent=String(p).padStart(2,'0')+"%";},55);
+
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:.12,rootMargin:"0px 0px -50px"});
+document.querySelectorAll('.reveal').forEach(x=>io.observe(x));
+
+const progress=document.querySelector('.scroll-progress');
+addEventListener('scroll',()=>{const d=document.documentElement;progress.style.width=(scrollY/(d.scrollHeight-innerHeight)*100)+'%'},{passive:true});
+
+const ring=document.querySelector('.pointer-ring'),dot=document.querySelector('.pointer-dot');
+if(matchMedia('(pointer:fine)').matches){
+ document.body.classList.add('cursor-ready');
+ let rx=0,ry=0,tx=0,ty=0;
+ addEventListener('pointermove',e=>{tx=e.clientX;ty=e.clientY;dot.style.left=tx+'px';dot.style.top=ty+'px'});
+ (function loop(){rx+=(tx-rx)*.16;ry+=(ty-ry)*.16;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop)})();
+ document.querySelectorAll('a,.btn,.feature,.ring,.price-card').forEach(el=>{
+   el.addEventListener('mouseenter',()=>{ring.style.width='68px';ring.style.height='68px';ring.style.borderColor='#9b7cff'});
+   el.addEventListener('mouseleave',()=>{ring.style.width='34px';ring.style.height='34px';ring.style.borderColor='rgba(246,245,242,.45)'});
+ });
+}
+document.querySelectorAll('.feature,.ring,.price-card').forEach(card=>{
+ card.addEventListener('pointermove',e=>{
+   if(matchMedia('(pointer:fine)').matches){
+    const r=card.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+    card.style.transform=`perspective(700px) rotateX(${(-y*5).toFixed(2)}deg) rotateY(${(x*6).toFixed(2)}deg) translateY(-5px)`;
+   }
+ });
+ card.addEventListener('pointerleave',()=>card.style.transform='');
+});
+</script>
+</body>
+</html>
